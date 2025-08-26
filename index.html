@@ -14,9 +14,38 @@
       <input type = "number" id = "minint" name = "minint"><br>
       <label for = "intb">Enter Maximum Integer Below:</label><br>
       <input type = "number" id = "maxint" name = "maxint"><br>
+
+      <button type = "button" onclick = "generatePassword()">Generate Password</button>
     </form>
     
-    <p></p>
-    <p><a href="secondpage.html">More</a></p>
+    <p id = "result"></p>
+    <script>
+      function generatePassword() {
+  //get values and convert to numbers
+        var min = parseInt(document.getElementId("minint").value);
+        var max = parseInt(document.getElementId("maxint").value);
+
+        //Only numbers
+        if(isNan(min) || isNan(max) || min > max || min < 1) {
+          document.getElementById("result").textContent = "Please enter valid numbers";
+          return;
+      }
+
+        //Ran pass length
+        var length = Math.floor(Math.random()*(max-min+1)) + min;
+
+        var letters = "abcdefghijklmnopqrstuvwxyz";
+        var password = "";
+
+        //for loop
+        for (var i = 0; i < length; i++) {
+          var randomIndex = Math.floor(Math.random()*26);
+          password += letters[randomIndex];
+        }
+
+        //show
+        document.getElementById("result").textContent = "Generated Password: " + password;
+      }
+    </script>
   </body>
 </html>
